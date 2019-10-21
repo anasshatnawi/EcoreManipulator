@@ -7,6 +7,7 @@
  */
 package fr.obeo.interview.task;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -90,7 +91,13 @@ public class ObeoTaskMain {
 		// add the class to the first package in the meta-model
 		EPackage mainPackage = (EPackage) resource.getContents().get(0);
 		mainPackage.getEClassifiers().add(newClass);
-		System.out.println("The " + newClass.getName() + " class has been added correctly.");
+		try {
+			resource.save(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("The " + newClass.getName() + " class has been added correctly.");		
 	}
 
 	/**
